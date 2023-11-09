@@ -26,7 +26,7 @@ public class Printer {
     public void clearFile() throws IOException {
         printWriter.close(); // Closes the current PrintWriter
         // Effectively clear/overwrite the file's content by reopenning it
-        printWriter = new PrintWriter(new BufferedWriter(new FileWriter(this.filename)));
+        printWriter = new PrintWriter(new BufferedWriter(new FileWriter(this.outputFile.getName())));
         printWriter.flush(); // Flush the stream to confirm it's clear
     }
 
