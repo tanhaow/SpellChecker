@@ -24,13 +24,13 @@ public class SpellChecker {
     CONSTRUCTOR
  **********************************************************************************************************************/
     public SpellChecker() {
+        userInput = new Scanner(System.in);
         inputDict();
         inputFile();
         dictFile = new File(dictFilename);
         inputFile = new File(inputFilename);
         outputFile = new File(outputFilename);
         wordRec = new WordRecommender(dictFilename);
-        userInput = new Scanner(System.in);
     }
 
 /**********************************************************************************************************************
@@ -142,7 +142,10 @@ public class SpellChecker {
             System.out.printf(Util.NO_SUGGESTIONS);
         } else {
             System.out.printf(Util.FOLLOWING_SUGGESTIONS);
-            System.out.printf(Util.SUGGESTION_ENTRY, suggestedWords.size(), suggestedWords);
+//            System.out.printf(Util.SUGGESTION_ENTRY, suggestedWords.size(), suggestedWords);
+            for (int i = 0; i < suggestedWords.size(); i++) {
+                System.out.printf(Util.SUGGESTION_ENTRY, i + 1, suggestedWords.get(suggestedWords.size() - i -1));
+            }
         }
     }
 
@@ -151,8 +154,8 @@ public class SpellChecker {
         String chosenWord = "";
         while(Objects.equals(chosenWord, "")) {
             if(suggestedWords.isEmpty()) {                          // Prompt message should depend on whether word has suggestions or not
-                System.out.println(Util.TWO_OPTION_PROMPT);         // if the word does NOT have suggestions, only two options: "a" and "t"
-            } else {System.out.println(Util.THREE_OPTION_PROMPT); } // if the word does have suggestions, there are three option: 'r', 'a', 't'
+                System.out.printf(Util.TWO_OPTION_PROMPT);         // if the word does NOT have suggestions, only two options: "a" and "t"
+            } else {System.out.printf(Util.THREE_OPTION_PROMPT); } // if the word does have suggestions, there are three option: 'r', 'a', 't'
 
             String entry = userInput.next();                        // get user's input entry
             /***************************************************************
@@ -163,7 +166,7 @@ public class SpellChecker {
                 while(true) {                                               // get the user input number entry and check if it is valid
                     int wordNum = userInput.nextInt();
                     if (1 <= wordNum && wordNum <= suggestedWords.size()) {
-                        chosenWord = suggestedWords.get(wordNum-1);         // if valid, set it as the chosen word, then break the loop
+                        chosenWord = suggestedWords.get(suggestedWords.size() - wordNum);         // if valid, set it as the chosen word, then break the loop
                         break;
                     } else { System.out.printf(Util.INVALID_RESPONSE); }    // else, continue the loop, prompt the user to re-input
                 }
