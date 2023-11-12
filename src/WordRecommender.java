@@ -124,16 +124,13 @@ public class WordRecommender {
 
         ArrayList<String> result = new ArrayList<String>();
         HashMap<Double, ArrayList<String>> candidates = getValidCandidates(word, tolerance, commonPercent);
-//        System.out.println(candidates);
         int len = word.length();
         int count = topN;
 
         // Rank topN valid replacements based on similarity
         while (count > 0 && !candidates.isEmpty()) {
             double maxSimilarity = max(candidates.keySet());
-//            System.out.println(maxSimilarity);
             ArrayList<String> replacements = candidates.remove(maxSimilarity);
-//            System.out.println(replacements);
             // if there are more valid replacements than spaces left in topN list
             if (replacements.size() >= count) {
                 for (int i = 0; i < count; i++) {
