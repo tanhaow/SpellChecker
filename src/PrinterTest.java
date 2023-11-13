@@ -19,6 +19,7 @@ public class PrinterTest {
         outputFile = new File("output.txt");
         filePath = outputFile.getPath();
         printer = new Printer(outputFile);
+        printer.clearFile();
     }
 
     @Test
