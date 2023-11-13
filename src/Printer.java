@@ -12,7 +12,7 @@ public class Printer {
 
     // Opens the file in append mode
     private void openFile() throws IOException {
-        FileWriter fw = new FileWriter(this.outputFile.getName(), true);
+        FileWriter fw = new FileWriter(this.outputFile, true);
         printWriter = new PrintWriter(new BufferedWriter(fw));
     }
 
