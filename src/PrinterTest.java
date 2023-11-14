@@ -16,7 +16,7 @@ public class PrinterTest {
 
     @BeforeEach
     void init() throws IOException {
-        outputFile = new File("output.txt");
+        outputFile = new File("src/output.txt");
         filePath = outputFile.getPath();
         printer = new Printer(outputFile);
         printer.clearFile();
